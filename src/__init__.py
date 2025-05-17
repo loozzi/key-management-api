@@ -5,6 +5,7 @@ import uvicorn
 from fastapi import FastAPI
 
 from src.configs import Environment
+from src.db.database import Database
 
 if len(sys.argv) > 1 and sys.argv[1] == "--dev":
     env = "dev"
@@ -13,6 +14,14 @@ else:
 environment = Environment(env)
 
 app = FastAPI(title=environment.env.APP_NAME)
+
+db = Database(
+    environment.env.DB_HOST,
+    environment.env.DB_PORT,
+    environment.env.DB_NAME,
+    environment.env.DB_USER,
+    environment.env.DB_PASSWORD,
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
