@@ -39,6 +39,13 @@ class TokenService:
         to_encode.update({"is_refresh": True})
         refresh_token = jwt.encode(to_encode, self.secret_key, algorithm=self.algorithm)
 
+        # Save the refresh token in the database
+        saved = self.user_repository.update_token(
+            user_id=data["sub"], token=refresh_token
+        )
+        if not saved:
+            raise ValueError("Failed to save refresh token in the database")
+
         return access_token, refresh_token
 
     def decode_access_token(self, token: str, is_refresh: bool = False) -> dict:
