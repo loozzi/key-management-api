@@ -20,7 +20,7 @@ class SignUpRequest(BaseModel):
     email: str
 
 
-class SignInResponse(BaseModel):
+class TokenResponse(BaseModel):
     """
     Response model for sign-in.
     """
