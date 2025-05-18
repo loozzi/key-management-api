@@ -1,5 +1,6 @@
 fastapi
 mysql-connector-python
 pyjwt
-dotenv
+python-dotenv
 uvicorn
+pydantic
