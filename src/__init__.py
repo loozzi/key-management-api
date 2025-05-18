@@ -37,6 +37,6 @@ logger.info(f"Debug: {environment.env.DEBUG}")
 logger.info("Starting FastAPI application...")
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello, World!"}
+from src.api import api as api_router
+
+app.include_router(api_router)
